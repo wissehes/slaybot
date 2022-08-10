@@ -53,3 +53,5 @@ config.json
 dist/
 
 main.js.old
+
+*.db*
