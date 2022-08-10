@@ -1,12 +1,12 @@
 import { SlashCommandBuilder } from "discord.js";
-import SlayCommand from "../Structs/SlayCommand";
+import SlayCommand from "../../Structs/SlayCommand";
 
 import {
   joinVoiceChannel,
   createAudioPlayer,
   createAudioResource,
 } from "@discordjs/voice";
-import getNowPlaying from "../helpers/getNowPlaying";
+import getNowPlaying from "../../helpers/getNowPlaying";
 
 export const Slay: SlayCommand = {
   data: new SlashCommandBuilder()

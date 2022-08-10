@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-import SlayCommand from "src/Structs/SlayCommand";
+import SlayCommand from "../../Structs/SlayCommand";
 
 export const InviteCommand: SlayCommand = {
   data: new SlashCommandBuilder()

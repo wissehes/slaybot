@@ -1,12 +1,13 @@
-import SlayCommand from "src/Structs/SlayCommand";
-import { InviteCommand } from "./Invite";
+import SlayCommand from "../Structs/SlayCommand";
 
-import { NowPlayingCommand } from "./NowPlaying";
-import { Ping } from "./ping";
-import { SayCommand } from "./Say";
-import { Slay } from "./Slay";
-import { StopCommand } from "./Stop";
-import { TimeCommand } from "./Time";
+import { NowPlayingCommand } from "./Radio/NowPlaying";
+import { StopCommand } from "./Radio/Stop";
+import { Slay } from "./Radio/Slay";
+
+import { InviteCommand } from "./Basic/Invite";
+import { Ping } from "./Basic/ping";
+import { SayCommand } from "./Basic/Say";
+import { TimeCommand } from "./Basic/Time";
 
 export const Commands: SlayCommand[] = [
   Ping,

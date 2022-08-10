@@ -1,6 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import getNowPlaying from "../helpers/getNowPlaying";
-import SlayCommand from "../Structs/SlayCommand";
+import getNowPlaying from "../../helpers/getNowPlaying";
+import SlayCommand from "src/Structs/SlayCommand";
 
 export const NowPlayingCommand: SlayCommand = {
   data: new SlashCommandBuilder()
