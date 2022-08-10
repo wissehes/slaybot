@@ -1,7 +1,5 @@
-import { Collection, GatewayIntentBits } from "discord.js";
+import { GatewayIntentBits } from "discord.js";
 import SlayClient from "./Structs/SlayClient";
-import path from "path";
-import fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
 
