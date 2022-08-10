@@ -10,6 +10,7 @@ import { SayCommand } from "./Basic/Say";
 import { TimeCommand } from "./Basic/Time";
 import { FMCommand } from "./LastFM/FM";
 import { SetCommand } from "./LastFM/Set";
+import { InfoCommand } from "./Basic/Info";
 
 export const Commands: SlayCommand[] = [
   // Basic commands
@@ -17,6 +18,7 @@ export const Commands: SlayCommand[] = [
   InviteCommand,
   TimeCommand,
   SayCommand,
+  InfoCommand,
 
   // Radio commands
   Slay,
