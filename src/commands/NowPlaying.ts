@@ -13,7 +13,7 @@ export const NowPlayingCommand: SlayCommand = {
       const embed = new EmbedBuilder()
         .setTitle(data.now_playing.song.title)
         .setDescription(
-          `By *${data.now_playing.song.artist}*\nNext up: **${data.playing_next.song.title}** by **${data.playing_next.song.artist}**`
+          `By *${data.now_playing.song.artist}*\nOn ${data.now_playing.song.album}\nNext up: **${data.playing_next.song.title}** by **${data.playing_next.song.artist}**`
         )
         .setThumbnail(data.now_playing.song.art)
         .setColor("Blue")
