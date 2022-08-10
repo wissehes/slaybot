@@ -1,4 +1,4 @@
-import { GatewayIntentBits } from "discord.js";
+import { ActivityType, GatewayIntentBits } from "discord.js";
 import SlayClient from "./Structs/SlayClient";
 import dotenv from "dotenv";
 dotenv.config();
@@ -8,6 +8,7 @@ const client = new SlayClient({
 });
 
 client.once("ready", () => {
+  client.user?.setActivity("dilf kasteel", { type: ActivityType.Watching });
   console.log("Ready!");
 });
 
