@@ -15,4 +15,18 @@ model User {
   discordId String
 
   lastfm_username String?
+
+  spotifyWaitings SpotifyLoginWaiting[]
+  spotifyAccessToken String?
+  spotifyRefreshToken String?
+  spotifyExpires DateTime?
+}
+
+model SpotifyLoginWaiting {
+  id Int @id @default(autoincrement())
+
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+
+  waitId String @unique
 }
