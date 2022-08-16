@@ -1,4 +1,5 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import getOrRefreshAccessToken from "../../helpers/getOrRefreshAccesstoken";
 import SlayCommand from "src/Structs/SlayCommand";
 
 export const SpotifyInfoCommand: SlayCommand = {
@@ -23,19 +24,10 @@ export const SpotifyInfoCommand: SlayCommand = {
       return;
     }
 
-    client.spotify.setAccessToken(accesToken);
     client.spotify.setRefreshToken(refreshToken);
 
-    if (new Date() > expirationDate) {
-      console.log("refreshing accesstoken...");
-      try {
-        await client.spotify.refreshAccessToken();
-      } catch (e) {
-        console.error(e);
-        await interaction.editReply(`Could not refresh access token...`);
-        return;
-      }
-    }
+    await getOrRefreshAccessToken(dbUser, client);
+
     try {
       const { body: me } = await client.spotify.getMe();
 

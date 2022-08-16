@@ -1,5 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import SlayCommand from "src/Structs/SlayCommand";
+import getOrRefreshAccessToken from "../../helpers/getOrRefreshAccesstoken";
 
 export const SpotifyNowPlayingCommand: SlayCommand = {
   data: new SlashCommandBuilder()
@@ -23,30 +24,22 @@ export const SpotifyNowPlayingCommand: SlayCommand = {
       return;
     }
 
-    client.spotify.setAccessToken(accesToken);
     client.spotify.setRefreshToken(refreshToken);
 
-    if (new Date() > expirationDate) {
-      console.log("refreshing accesstoken...");
-      try {
-        await client.spotify.refreshAccessToken();
-      } catch (e) {
-        console.error(e);
-        await interaction.editReply(`Could not refresh access token...`);
-        return;
-      }
-    }
+    await getOrRefreshAccessToken(dbUser, client);
 
-    try {
-      const { body: np } = await client.spotify.getMyCurrentPlaybackState();
-      console.log(JSON.stringify(np.item));
-      const item = np.item as unknown as {
-        artists: { name: string }[];
-        album: { images: { url: string }[] | null };
-      };
-      const artists = item.artists.map((a) => a.name).join(", ");
+    const { body: np } = await client.spotify.getMyCurrentPlaybackState();
 
-      const embed = new EmbedBuilder()
+    const item = np.item as unknown as {
+      artists: { name: string }[];
+      album: { images: { url: string }[] | null };
+    } | null;
+    const artists = item?.artists.map((a) => a.name).join(", ");
+
+    const embed = new EmbedBuilder();
+
+    if (item) {
+      embed
         .setAuthor({
           name: `${interaction.user.username}'s Spotify`,
         })
@@ -54,18 +47,13 @@ export const SpotifyNowPlayingCommand: SlayCommand = {
         .setDescription(`**By:** *${artists}*\n**On:** ${np.device.name}`)
         .setThumbnail(item.album.images?.[0].url || "")
         .setColor("Random");
-
-      const url = np.item?.external_urls.spotify;
-      if (url) embed.setURL(url);
-
-      //   const item = np.item;
-      interaction.editReply({ embeds: [embed] });
-    } catch (e) {
-      console.error(e);
-
-      interaction.editReply(
-        "I couldn't check your now playing status. Please try logging in again using `/login`."
-      );
+    } else {
+      embed.setTitle("Not Playing anything.").setColor("Random");
     }
+    const url = np.item?.external_urls.spotify;
+    if (url) embed.setURL(url);
+
+    //   const item = np.item;
+    interaction.editReply({ embeds: [embed] });
   },
 };
