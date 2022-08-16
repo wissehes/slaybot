@@ -11,6 +11,9 @@ import { TimeCommand } from "./Basic/Time";
 import { FMCommand } from "./LastFM/FM";
 import { SetCommand } from "./LastFM/Set";
 import { InfoCommand } from "./Basic/Info";
+import { LoginCommand } from "./Spotify/Login";
+import { SpotifyInfoCommand } from "./Spotify/SpotifyInfo";
+import { SpotifyNowPlayingCommand } from "./Spotify/SpotifyNP";
 
 export const Commands: SlayCommand[] = [
   // Basic commands
@@ -28,4 +31,9 @@ export const Commands: SlayCommand[] = [
   // Last.fm commands
   FMCommand,
   SetCommand,
+
+  // Spotify
+  LoginCommand,
+  SpotifyInfoCommand,
+  SpotifyNowPlayingCommand,
 ];
