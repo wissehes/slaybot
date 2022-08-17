@@ -16,24 +16,7 @@ export default interface SlayCommand {
   ) => Promise<void>;
 }
 
-// export default class SlayCommand {
-//   constructor(options: SlayCommandOptions) {
-//     this.data = options.data;
-//     this.execute = options.execute;
-//   }
-//   data: SlashCommandBuilder;
-//   execute: (a: ChatInputCommandInteraction) => void;
-// }
-
-// type SlayCommandOptions = {
-//   data: SlashCommandBuilder;
-//   execute: (interaction: ChatInputCommandInteraction) => void;
-// };
-
-// new SlayCommand({
-//   data: new SlashCommandBuilder().setName("wisse").setDescription("slay"),
-//   async execute(interaction) {
-//     interaction;
-//     await interaction.reply("");
-//   },
-// });
+export interface SlayCommandGroup {
+  name: string;
+  commands: SlayCommand[];
+}
