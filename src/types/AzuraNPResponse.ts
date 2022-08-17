@@ -4,7 +4,7 @@
 
 export type getNowPlayingResponse = AzuraCastNowPlaying;
 
-interface AzuraCastNowPlaying {
+export interface AzuraCastNowPlaying {
   station: Station;
   listeners: Listeners;
   live: Live;
