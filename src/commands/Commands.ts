@@ -1,4 +1,4 @@
-import SlayCommand from "../Structs/SlayCommand";
+import SlayCommand, { SlayCommandGroup } from "../Structs/SlayCommand";
 
 import { NowPlayingCommand } from "./Radio/NowPlaying";
 import { StopCommand } from "./Radio/Stop";
@@ -14,26 +14,33 @@ import { InfoCommand } from "./Basic/Info";
 import { LoginCommand } from "./Spotify/Login";
 import { SpotifyInfoCommand } from "./Spotify/SpotifyInfo";
 import { SpotifyNowPlayingCommand } from "./Spotify/SpotifyNP";
+import { InputTestCommand } from "./InputTest";
+import { HelpCommand } from "./Basic/Help";
 
-export const Commands: SlayCommand[] = [
-  // Basic commands
-  Ping,
-  InviteCommand,
-  TimeCommand,
-  SayCommand,
-  InfoCommand,
-
-  // Radio commands
-  Slay,
-  NowPlayingCommand,
-  StopCommand,
-
-  // Last.fm commands
-  FMCommand,
-  SetCommand,
-
-  // Spotify
-  LoginCommand,
-  SpotifyInfoCommand,
-  SpotifyNowPlayingCommand,
+export const CommandGroups: SlayCommandGroup[] = [
+  {
+    name: "Basic Commands",
+    commands: [
+      Ping,
+      InviteCommand,
+      TimeCommand,
+      SayCommand,
+      InfoCommand,
+      HelpCommand,
+    ],
+  },
+  { name: "Radio Commands", commands: [Slay, NowPlayingCommand, StopCommand] },
+  { name: "Last.fm Commands", commands: [FMCommand, SetCommand] },
+  {
+    name: "Spotify Commands",
+    commands: [LoginCommand, SpotifyInfoCommand, SpotifyNowPlayingCommand],
+  },
 ];
+
+export const Commands: SlayCommand[] = [];
+
+for (const commandgroup of CommandGroups) {
+  for (const command of commandgroup.commands) {
+    Commands.push(command);
+  }
+}
