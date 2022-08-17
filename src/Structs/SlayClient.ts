@@ -5,6 +5,7 @@ import SpotifyWebApi from "spotify-web-api-node";
 import { webServer } from "../web/web";
 import { Commands } from "../commands/Commands";
 import SlayCommand from "./SlayCommand";
+import axios, { AxiosInstance } from "axios";
 
 export default class SlayClient extends Client {
   constructor(options: ClientOptions) {
@@ -18,7 +19,10 @@ export default class SlayClient extends Client {
     });
 
     this.players = new Collection();
-    this.player = createAudioPlayer();
+    this.azura = axios.create({
+      baseURL: "https://radio.smarthome.wissehes.nl/api",
+      headers: { "X-API-Key": process.env.AZURA_API as string },
+    });
 
     for (const command of Commands) {
       this.commands.set(command.data.name, command);
@@ -31,6 +35,7 @@ export default class SlayClient extends Client {
   prisma: PrismaClient;
   spotify: SpotifyWebApi;
 
+  azura: AxiosInstance;
+
   players: Collection<string, AudioPlayer>;
-  player: AudioPlayer;
 }
