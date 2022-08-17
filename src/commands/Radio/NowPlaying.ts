@@ -1,32 +1,30 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import getNowPlaying from "../../helpers/getNowPlaying";
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ComponentType,
+  SlashCommandBuilder,
+} from "discord.js";
 import SlayCommand from "src/Structs/SlayCommand";
+import createNowPlayingEmbed from "../../helpers/createNPEmbed";
 
 export const NowPlayingCommand: SlayCommand = {
   data: new SlashCommandBuilder()
     .setName("nowplaying")
     .setDescription("Shows the current playing track on SlayRadio"),
   async execute(interaction) {
+    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+      new ButtonBuilder()
+        .setCustomId("reload-np")
+        .setLabel("Refresh")
+        .setStyle(ButtonStyle.Primary)
+        .setEmoji("🔄")
+    );
+
     try {
-      const data = await getNowPlaying();
+      const embed = await createNowPlayingEmbed();
 
-      const embed = new EmbedBuilder()
-        .setTitle(data.now_playing.song.title)
-        .setDescription(
-          `By *${data.now_playing.song.artist}*\nOn ${data.now_playing.song.album}\nNext up: **${data.playing_next.song.title}** by **${data.playing_next.song.artist}**`
-        )
-        .setThumbnail(data.now_playing.song.art)
-        .setColor("Blue")
-        .setAuthor({
-          name: "SlayRadio",
-          url: "https://radio.smarthome.wissehes.nl/public/slay",
-        })
-        .setFooter({
-          text: "Use /slay to listen in your vc",
-          iconURL: data.playing_next.song.art,
-        });
-
-      interaction.reply({ embeds: [embed] });
+      interaction.reply({ embeds: [embed], components: [row] });
     } catch (error) {
       console.error(error);
       interaction.reply("oopsie an error happened!!! :(");
