@@ -14,7 +14,6 @@ import { InfoCommand } from "./Basic/Info";
 import { LoginCommand } from "./Spotify/Login";
 import { SpotifyInfoCommand } from "./Spotify/SpotifyInfo";
 import { SpotifyNowPlayingCommand } from "./Spotify/SpotifyNP";
-import { InputTestCommand } from "./InputTest";
 import { HelpCommand } from "./Basic/Help";
 
 export const CommandGroups: SlayCommandGroup[] = [
