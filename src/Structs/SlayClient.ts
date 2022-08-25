@@ -24,6 +24,11 @@ export default class SlayClient extends Client {
       headers: { "X-API-Key": process.env.AZURA_API as string },
     });
 
+    this.lastfm = axios.create({
+      baseURL: "http://ws.audioscrobbler.com/2.0/",
+      params: { api_key: process.env.LASTFMAPI as string, format: "json" },
+    });
+
     for (const command of Commands) {
       this.commands.set(command.data.name, command);
     }
@@ -36,6 +41,7 @@ export default class SlayClient extends Client {
   spotify: SpotifyWebApi;
 
   azura: AxiosInstance;
+  lastfm: AxiosInstance;
 
   players: Collection<string, AudioPlayer>;
 }
