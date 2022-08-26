@@ -52,7 +52,7 @@ export const CollageCommand: SlayCommand = {
     });
 
     if (!user || !user.lastfm_username) {
-      interaction.reply(
+      interaction.editReply(
         "You haven't set your Last.fm username up with me yet. Use `/set <username>`."
       );
       return;
