@@ -15,6 +15,7 @@ import { LoginCommand } from "./Spotify/Login";
 import { SpotifyInfoCommand } from "./Spotify/SpotifyInfo";
 import { SpotifyNowPlayingCommand } from "./Spotify/SpotifyNP";
 import { HelpCommand } from "./Basic/Help";
+import { CollageCommand } from "./LastFM/Collage";
 
 export const CommandGroups: SlayCommandGroup[] = [
   {
@@ -29,7 +30,10 @@ export const CommandGroups: SlayCommandGroup[] = [
     ],
   },
   { name: "Radio Commands", commands: [Slay, NowPlayingCommand, StopCommand] },
-  { name: "Last.fm Commands", commands: [FMCommand, SetCommand] },
+  {
+    name: "Last.fm Commands",
+    commands: [FMCommand, SetCommand, CollageCommand],
+  },
   {
     name: "Spotify Commands",
     commands: [LoginCommand, SpotifyInfoCommand, SpotifyNowPlayingCommand],
