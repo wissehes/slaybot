@@ -28,7 +28,9 @@ export const FMCommand: SlayCommand = {
         .setTitle(first.name)
         .setDescription(`By ${first.artist["#text"]}`)
         .setThumbnail(
-          first.image.find((a) => a.size == "large")?.["#text"] || ""
+          first.image.find((a) => a.size == "extralarge")?.["#text"] ||
+            first.image.pop()?.["#text"] ||
+            ""
         );
 
       if (first["@attr"]?.nowplaying) {
