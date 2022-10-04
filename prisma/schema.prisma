@@ -30,3 +30,9 @@ model SpotifyLoginWaiting {
 
   waitId String @unique
 }
+
+model Guild {
+  id Int @id @default(autoincrement())
+
+  discordId String
+}
