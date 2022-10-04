@@ -17,6 +17,7 @@ import { SpotifyNowPlayingCommand } from "./Spotify/SpotifyNP";
 import { HelpCommand } from "./Basic/Help";
 import { CollageCommand } from "./LastFM/Collage";
 import { RequestCommand } from "./Radio/Request";
+import { TikTokTTSCommand } from "./Slay/TikTok_TTS";
 
 export const CommandGroups: SlayCommandGroup[] = [
   {
@@ -41,6 +42,10 @@ export const CommandGroups: SlayCommandGroup[] = [
   {
     name: "Spotify Commands",
     commands: [LoginCommand, SpotifyInfoCommand, SpotifyNowPlayingCommand],
+  },
+  {
+    name: "Slay Commands",
+    commands: [TikTokTTSCommand],
   },
 ];
 
