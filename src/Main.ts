@@ -14,20 +14,20 @@ const client = new SlayClient({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
 });
 
-const ws = new WebSocket(process.env.WS_URL as string);
+// const ws = new WebSocket(process.env.WS_URL as string);
 
-ws.on("open", () => console.log("AzuraCast WebSocket connected!"));
-ws.on("message", (data) => {
-  const decoded: AzuraCastNowPlaying = JSON.parse(data.toString());
-  const np = decoded.now_playing.song.text;
-  try {
-    client.user?.setActivity(`${np} on SlayRadio`, {
-      type: ActivityType.Listening,
-    });
-  } catch (e) {
-    console.log("Couldn't update activity!");
-  }
-});
+// ws.on("open", () => console.log("AzuraCast WebSocket connected!"));
+// ws.on("message", (data) => {
+//   const decoded: AzuraCastNowPlaying = JSON.parse(data.toString());
+//   const np = decoded.now_playing.song.text;
+//   try {
+//     client.user?.setActivity(`${np} on SlayRadio`, {
+//       type: ActivityType.Listening,
+//     });
+//   } catch (e) {
+//     console.log("Couldn't update activity!");
+//   }
+// });
 
 client.once("ready", () => {
   client.user?.setActivity("dilf kasteel", { type: ActivityType.Watching });
@@ -39,7 +39,6 @@ client.on("interactionCreate", async (interaction) => {
 
   const command = client.commands.get(interaction.commandName);
   if (!command) return;
-  interaction.reply;
 
   try {
     await command.execute(interaction, client);
